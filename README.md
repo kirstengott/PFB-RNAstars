@@ -10,6 +10,9 @@ star documentation:
 
 https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf 
 
+HT-seq coding line:
+htseq-count -m union -r pos -i gene -a 10 --stranded=no copiedaligned.out.sam genome/GCF_000146045.2_R64_genomic.gff
+
 sleuth intro:
 https://pachterlab.github.io/sleuth_walkthroughs/trapnell/analysis.html
 
