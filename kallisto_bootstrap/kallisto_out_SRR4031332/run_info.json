@@ -1,0 +1,13 @@
+{
+	"n_targets": 6600,
+	"n_bootstraps": 5,
+	"n_processed": 10000,
+	"n_pseudoaligned": 7436,
+	"n_unique": 6461,
+	"p_pseudoaligned": 74.4,
+	"p_unique": 64.6,
+	"kallisto_version": "0.44.0",
+	"index_version": 10,
+	"start_time": "Sun Oct 28 18:01:05 2018",
+	"call": "kallisto quant -i ../kallisto/S.cerevisiae_R64_kallisto_index -o kallisto_out_SRR4031332 --single -l 51 -s 10 -b 5 ../data/test/SRR4031332.fastq.gz"
+}

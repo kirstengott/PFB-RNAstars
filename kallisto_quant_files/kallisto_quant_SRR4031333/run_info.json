@@ -1,0 +1,13 @@
+{
+	"n_targets": 6106,
+	"n_bootstraps": 0,
+	"n_processed": 10000,
+	"n_pseudoaligned": 8476,
+	"n_unique": 6806,
+	"p_pseudoaligned": 84.8,
+	"p_unique": 68.1,
+	"kallisto_version": "0.44.0",
+	"index_version": 10,
+	"start_time": "Sun Oct 28 15:02:58 2018",
+	"call": "kallisto quant -i kallisto/GCF_000146045_kallisto_index -o kallisto_quant_SRR4031333 --single -l 51 -s 10 data/test/SRR4031333.fastq.gz"
+}
