@@ -11,7 +11,7 @@ star documentation:
 https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf 
 
 HT-seq coding line:
-htseq-count -m union -r pos -i gene -a 10 --stranded=no copiedaligned.out.sam genome/GCF_000146045.2_R64_genomic.gff
+`htseq-count -m union -r pos -i gene_id -a 10 --stranded=no Aligned.out.sam ../share/genome/ensembl/Saccharomyces_cerevisiae.R64-1-1.94.gtf`
 
 sleuth intro:
 https://pachterlab.github.io/sleuth_walkthroughs/trapnell/analysis.html
