@@ -3,7 +3,7 @@
 args <- commandArgs(TRUE)
 
 if (length(args) == 0L || any(c('-h', '--help') %in% args)) {
-  message('usage: path/to/sleuth_script.R kallisto
+  message('usage: path/to/sleuth_script.R kallistodir resultdir
           kallistodir       path to the blastdb directory
           resultdir         path to store results
           -h, --help        to print help messages')
@@ -56,7 +56,7 @@ sleuth_table <- sleuth_results(so, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significant <- dplyr::filter(sleuth_table, qval <= significance)
 head(sleuth_significant, 20)
 
-write.table(sleuth_significant, file = 'sleuth/significant_genes.tsv',
+write.table(sleuth_significant, file = 'resultdir/significant_genes.tsv',
             quote = FALSE,
             sep = "\t",
             row.names = FALSE)
@@ -65,17 +65,17 @@ write.table(sleuth_significant, file = 'sleuth/significant_genes.tsv',
 #p1 = plot_bootstrap(so, "ENST00000328933", units = "est_counts", color_by = "condition")
 plot_pca(so, color_by = 'condition') +
   theme_bw() +
-  ggsave('sleuth/pca.pdf')
+  ggsave(paste0(resultdir, '/pca.pdf'))
 
 plot_qq(so, test = 'conditionwt', test_type = 'wt', sig_level = significance) +
   theme_bw() +
-  ggsave('sleuth/qq.pdf')
+  ggsave(paste0(resultdir, '/qq.pdf'))
 
 plot_volcano(so, test = 'conditionwt', test_type = 'wt', sig_level = significance) +
   theme_bw() +
-  ggsave('sleuth/volcano.pdf')
+  ggsave(paste0(resultdir, '/volcano.pdf'))
 
 plot_ma(so, test = 'conditionwt', test_type = 'wt', sig_level = significance) +
   theme_bw() +
-  ggsave('sleuth/ma.pdf')
+  ggsave(paste0(resultdir, '/ma.pdf'))
 
