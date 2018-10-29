@@ -26,7 +26,7 @@ dir.create(resultdir)
 
 pval <-  0.001
 
-sampleFiles <- grep("HTseqoutput",list.files(directory),value=TRUE)
+sampleFiles <- grep("counts.txt",list.files(directory),value=TRUE)
 
 
 sample          <- c("SRR4031331", "SRR4031332", "SRR4031333", "SRR4031334", "SRR4031335", "SRR4031336")
