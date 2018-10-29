@@ -14,6 +14,7 @@ import re
 listdir=sys.argv[1]
 index_gtf='../../share/genome/ensembl/Saccharomyces_cerevisiae.R64-1-1.94.gtf'
 index_star='../../share/genomeDir'
+index_kallisto='kallisto/S.cerevisiae_R64_kallisto_index'
 
 filelist=os.listdir(listdir)
 print(filelist)
@@ -33,11 +34,10 @@ print(count)
 count=0
 for files in filelist:
     prefix = 'output/' +str(files[0:10:])
-    
-    
+    kallisto.kallisto_quant(index_kallisto,prefix+'kallisto',listdir+'/'+files)
     count+=1
 
-
+print(count)
 
 
 
