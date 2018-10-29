@@ -4,30 +4,23 @@
 import subprocess
 import sys
 
-
-#rtn = subprocess.check_output('ls -l', shell=True)  # specify you want to capture STDOUT
-#stdout = rtn.decode('utf-8')
-
-#lines = stdout.splitlines()
-#print(lines)
-
-
-#files=os.path.dirname(/projects/rna-stars/cho/PFB-RNAstars/data/test)
-#fileDir = os.path.dirname(os.path.realpath('__file__'))
-#print fileDir
-#filename = os.path.join(fileDir, '../data/test/SRR4031331.fastq.gz')
-#readFile(filename)
-index=sys.argv[1]
-readfile=sys.argv[2]
+#index=sys.argv[1]
+#readfile=sys.argv[2]
+def kallisto_index(index_name,fasta_file):
+    kallisto_indexfile=subprocess.check_output('kallisto index --index={} {}'.format(index_name,fasta_file),shell=True)
+    return kallisto_indexfile
+#takes fasta file and makes it into an index for kallisto alignment
 
 
-def kallisto_quant(genome,reads):
-    kallisto_counts=subprocess.check_output('kallisto quant -i {} -o kallisto_quant_SRR4031332 --single -l 51 -s 10 {}'.format(genome,reads), shell=True)  # specify you want to capture STDOUT
-   # stdout = rtn.decode('utf-8')
-   # lines = stdout.splitlines()
+def kallisto_quant(kallisto_indexfile, outfile_name, reads):
+    kallisto_counts=subprocess.check_output('kallisto quant -i {} -o {} --single -l 51 -s 10 {}'.format(kallisto_indexfile, outfile_name, reads), shell=True)
     return kallisto_counts
 
-kallisto_quant(index,readfile)
+#takes in index file made in index step from fasta file
+#also takes in fastq files and 
+
+
+#kallisto_quant(index,readfile)
 
 
 

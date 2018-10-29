@@ -4,7 +4,7 @@ args <- commandArgs(TRUE)
 
 if (length(args) == 0L || any(c('-h', '--help') %in% args)) {
   message('usage: path/to/sleuth_script.R kallistodir resultdir
-          kallistodir       path to the blastdb directory
+          kallistodir       path to the kallisto output directory
           resultdir         path to store results
           -h, --help        to print help messages')
   q('no')
