@@ -21,7 +21,7 @@ def STARalign(genomeDir, readsFile):
 #	prefix_output = './path/{}'.format(prefix)
 #	need to add '--outFileNamePrefix {}' to subprocess output check
 	output = subprocess.check_output('STAR --runThreadN 15 --genomeDir {} --readFilesIn {} --readFilesCommand gunzip -c --quantMode GeneCounts'.format(genomeDir, readsFile,), shell=True)
-    return output
+         return output
 
-test = STARalign(genome, reads)
+#test = STARalign(genome, reads)
 
