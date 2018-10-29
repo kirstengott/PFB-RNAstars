@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import re
 import sys
-import subprocess
 import os
 
-#directoryToGet = sys.argv[1]
-
+# createFileList function grabs the names of the counts files
+# from the counts dir and creates a list using only the
+# 10 char SRR ID; required input is path to counts dir
 def createFileList(dirPath):
 	fileList = os.listdir(dirPath)
 	shortFileList = []
@@ -14,8 +14,11 @@ def createFileList(dirPath):
 		shortFileList.append(shortEntry)
 	return shortFileList
 
-#inputFile = 'SraRunTable.txt'
 
+# createFileDict function creates file dictionary matching 
+# experimental description ('strain' from file SraRunTable)
+# and matches it to the SRR ID from file list; requires
+# file list and path to input file (SraRunTable.txt)
 def createFileDict(fileList, inputFile):
 	extractFileList = []
 	for line in inputFile:
@@ -31,6 +34,7 @@ def createFileDict(fileList, inputFile):
 		itemID = itemList[11]
 		itemDesc = itemList[15]
 		fileDict[itemID] = itemDesc
+#hashed out lines below could have been used to make dict of lists with desc as key
 #		if itemDesc in fileDict.keys():	
 #			fileDict[itemDesc].append(itemID)
 #		else:
@@ -38,35 +42,10 @@ def createFileDict(fileList, inputFile):
 	return fileDict
 
 
-
+#sampleIDTable function prints two column table with 
+#SRR ID and experimental description on same lane, replicate info
+#will need to be added in R (by Kirsten?); required input dict
+#of matched SSR ID(key) and experimental description(value)
 def sampleIDTable(fileDict):
 	for item in fileDict:
 		print('{}\t{}'.format(item, fileDict[item]))	
-
-#	if fileDict[item] not in fileDict.values():
-#			print('{}\t{}\t{}'.format(item, fileDict[item], 1))
-#		if fileDict[item] in fileDict.values():
-#			count = 0
-#			count += 2
-#			print('{}\t{}\t{}'.format(item, fileDict[item], count))
-#
-#		if fileDict[item] in fileDict.values()
-#	for item in fileDict:
-	
-#		if for entry in fileList:
-#			if entry is in line:
-#				print(line)
-#			else: 
-
-fastqFileList = createFileList('../data/test/')
-#print(fastqFileList)
-
-#inputFile = sys.argv[1]
-inputFile = open('./SraRunTable.txt', 'r')
-
-extractFileDict = createFileDict(fastqFileList, inputFile)
-#print(extractFileDict)
-#print(extractFileDict['wt'])
-#print(extractFileDict['wt'][1])
-final = sampleIDTable(extractFileDict)
-
