@@ -5,37 +5,41 @@
 
 
 import STARalignWrapper_EH
-#import kallisto
-#import HTseqwrapper2
+import kallisto
+import HTseqwrapper2
 import sys
 import os
 import re
 
 listdir=sys.argv[1]
-index_star='../../../share/genomeDir'
+index_gtf='../../share/genome/ensembl/Saccharomyces_cerevisiae.R64-1-1.94.gtf'
+index_star='../../share/genomeDir'
+index_kallisto='kallisto/S.cerevisiae_R64_kallisto_index'
 
 filelist=os.listdir(listdir)
 print(filelist)
 print(listdir)
 count=0
 for files in filelist:
-    prefix = str(files[0:10:])
+    prefix = 'output/' +str(files[0:10:])
     STARalignWrapper_EH.STARalign(index_star,listdir+'/'+files,prefix)
-   
-    
-    
-    
+    HTseqwrapper2.HTseqwrapperfun(prefix+'Aligned.out.sam', index_gtf, prefix)
+#    fo = open(prefix+'counts.txt','w')
+#    fo.write(str(counts))
+#    fo.close()
     count+=1
 print(count)
 
 
+count=0
+for files in filelist:
+    prefix = 'output/' +str(files[0:10:])
+    kallisto.kallisto_quant(index_kallisto,prefix+'kallisto',listdir+'/'+files)
+    count+=1
+
+print(count)
 
 
-
-#aligned_sam = sys.argv[1]
-#gtf_reads = sys.argv[2]
-
-#STARalignWrapper.EH.STARalign(genome, reads)
 
 #HTseqwrapper2 is the name of file to import from and HTseqwrapperfun is the name of the function in the HTseqwrapper2
 #For the HTseq count step, this file will only work with HTseqwrapper2
