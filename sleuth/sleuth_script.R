@@ -56,7 +56,7 @@ sleuth_table <- sleuth_results(so, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significant <- dplyr::filter(sleuth_table, qval <= significance)
 head(sleuth_significant, 20)
 
-write.table(sleuth_significant, file = 'resultdir/significant_genes.tsv',
+write.table(sleuth_significant, file = paste0(resultdir, '/significant_genes.tsv'),
             quote = FALSE,
             sep = "\t",
             row.names = FALSE)

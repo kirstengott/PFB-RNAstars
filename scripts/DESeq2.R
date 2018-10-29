@@ -49,6 +49,12 @@ resultsNames(dds) # lists the coefficients
 res <- results(dds, name="condition_wt_vs_DRPL15B")
 
 
+write.table(res, file = paste0(resultdir, '/significant_genes.tsv'),
+            quote = FALSE,
+            sep = "\t",
+            row.names = FALSE)
+
+
 
 ## make a PCA plot
 rld     <- rlogTransformation(dds, blind = TRUE)
