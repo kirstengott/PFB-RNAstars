@@ -17,13 +17,22 @@ index_star='../../share/genomeDir'
 index_kallisto='kallisto/S.cerevisiae_R64_kallisto_index'
 
 filelist=os.listdir(listdir)
+
+## print to make sure we have our files referenced (add try/except?)
 print(filelist)
 print(listdir)
+
+
+
+## Add logic to run STAR and count the SAM file
 count=0
 for files in filelist:
     prefix = 'output/' +str(files[0:10:])
     STARalignWrapper_EH.STARalign(index_star,listdir+'/'+files,prefix)
     HTseqwrapper2.HTseqwrapperfun(prefix+'Aligned.out.sam', index_gtf, prefix)
+    ## add command for a samtools view to convert sam to bam file
+
+    
 #    fo = open(prefix+'counts.txt','w')
 #    fo.write(str(counts))
 #    fo.close()
@@ -31,6 +40,7 @@ for files in filelist:
 print(count)
 
 
+## Add logic to run kallisto
 count=0
 for files in filelist:
     prefix = 'output/' +str(files[0:10:])
