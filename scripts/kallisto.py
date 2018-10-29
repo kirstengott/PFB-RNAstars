@@ -13,7 +13,7 @@ def kallisto_index(index_name,fasta_file):
 
 
 def kallisto_quant(kallisto_indexfile, outfile_name, reads):
-    kallisto_counts=subprocess.check_output('kallisto quant -i {} -o {} --single -l 51 -s 10 {}'.format(kallisto_indexfile, outfile_name, reads), shell=True)
+    kallisto_counts=subprocess.check_output('kallisto quant -b 5 -i {} -o {} --single -l 51 -s 10 {}'.format(kallisto_indexfile, outfile_name, reads), shell=True)
     return kallisto_counts
 
 #takes in index file made in index step from fasta file

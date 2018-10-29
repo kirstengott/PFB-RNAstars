@@ -3,6 +3,7 @@
 #Make the python module of interest in the same directory, so the objects in the python script can be accessed by importing 
 #This can be made into a pipeline by extending to include the other smaller modules
 
+import subprocess
 import samtoolstest
 import STARalignWrapper_EH
 import kallisto
@@ -54,16 +55,18 @@ for files in filelist:
     except:
         print('SAM file not created')
         sys.exit(1)
-    HTseqwrapper2.HTseqwrapperfun(prefix+'Aligned.out.sam', index_gtf, prefix)
+    prefix1 = 'output/'+str(files[0:10:])
+    prefix2 = 'output/HTseq/'+str(files[0:10:])
+    HTseqwrapper2.HTseqwrapperfun(prefix1+'Aligned.out.sam', index_gtf, prefix2)
     HTSeqCount += 1
-    print(prefix + 'counts.txt created', 'Total Counts Files:', HTSeqCount)
+    print(prefix2 + 'counts.txt created', 'Total Counts Files:', HTSeqCount)
     
     samtoolstest.SAMbam(prefix+'Aligned.out.sam', prefix+'Aligned.out.bam')
 
 ## add command for a samtools view to convert sam to bam file
     try:
-        os.path.exists(prefix+'counts.txt')
-        print(prefix,'counts file exists')
+        os.path.exists(prefix2+'counts.txt')
+        print(prefix2,'counts file exists')
     except:
         print('Counts file not created')
         sys.exit(1)
@@ -78,7 +81,7 @@ print('STAR and HTseq complete')
 ## Add logic to run kallisto
 kallistocount=0
 for files in filelist:
-    prefix = 'output/' +str(files[0:10:])
+    prefix = 'output/kallisto/' +str(files[0:10:])
     kallisto.kallisto_quant(index_kallisto,prefix+'kallisto',listdir+'/'+files)
     kallistocount+=1
     print(prefix+'kallisto created','Total kallisto files:',kallistocount)
@@ -88,9 +91,8 @@ for files in filelist:
     except:
         print('kallisto abundance file not created')
         sys.exit(1)
-print(kallistocount)
 
-
-
+subprocess.check_output('./sleuth/sleuth_script.R output/kallisto output/sleuth', shell=True)
+subprocess.check_output('./scripts/DESeq2.R output/HTseq output/DESeq2', shell=True)
 
 
